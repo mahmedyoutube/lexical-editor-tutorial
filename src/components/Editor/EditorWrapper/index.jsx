@@ -8,6 +8,9 @@ import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
+import { MuiContentEditable, placeHolderSx } from "./styles";
+import { Box } from "@mui/material";
+import Toolbar from "../Toolbar";
 
 const theme = {};
 
@@ -54,14 +57,17 @@ function EditorWrapper() {
 
   return (
     <LexicalComposer initialConfig={initialConfig}>
-      <PlainTextPlugin
-        contentEditable={<ContentEditable />}
-        placeholder={<div>Enter some text...</div>}
-        ErrorBoundary={LexicalErrorBoundary}
-      />
-      <OnChangePlugin onChange={onChange} />
-      <HistoryPlugin />
-      <MyCustomAutoFocusPlugin />
+      <Toolbar />
+      <Box sx={{ position: "relative", background: "white", mt: 1 }}>
+        <PlainTextPlugin
+          contentEditable={<MuiContentEditable />}
+          placeholder={<Box sx={placeHolderSx}>Enter your text here</Box>}
+          ErrorBoundary={LexicalErrorBoundary}
+        />
+        <OnChangePlugin onChange={onChange} />
+        <HistoryPlugin />
+        <MyCustomAutoFocusPlugin />
+      </Box>
     </LexicalComposer>
   );
 }
