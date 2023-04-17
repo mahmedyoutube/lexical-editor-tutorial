@@ -17,6 +17,7 @@ import Toolbar from "../Toolbar";
 import lexicalEditorTheme from "../../../theme/lexicalEditorTheme";
 import lexicalEditorConfig from "../config";
 import ImagesPlugin from "../plugin/ImagePlugin";
+import FloatingTextFormatToolbarPlugin from "../plugin/FloatingTextFormatPlugin";
 
 // When the editor changes, you can get notified via the
 // LexicalOnChangePlugin!
@@ -63,6 +64,7 @@ function EditorWrapper() {
         <ImagesPlugin captionsEnabled={false} />
         <ListPlugin />
         <LinkPlugin />
+        <FloatingTextFormatToolbarPlugin />
       </Box>
     </LexicalComposer>
   );
