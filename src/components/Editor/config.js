@@ -5,6 +5,7 @@ import { HeadingNode, QuoteNode } from "@lexical/rich-text";
 import { CodeHighlightNode, CodeNode } from "@lexical/code";
 import { TableNode, TableCellNode, TableRowNode } from "@lexical/table";
 import { ListNode, ListItemNode } from "@lexical/list";
+import { ImageNode } from "./nodes/ImageNode";
 
 // Catch any errors that occur during Lexical updates and log them
 // or throw them as needed. If you don't throw them, Lexical will
@@ -29,6 +30,7 @@ const lexicalEditorConfig = {
     TableRowNode,
     AutoLinkNode,
     LinkNode,
+    ImageNode,
   ],
 };
 

@@ -16,6 +16,7 @@ import { LinkPlugin } from "@lexical/react/LexicalLinkPlugin";
 import Toolbar from "../Toolbar";
 import lexicalEditorTheme from "../../../theme/lexicalEditorTheme";
 import lexicalEditorConfig from "../config";
+import ImagesPlugin from "../plugin/ImagePlugin";
 
 // When the editor changes, you can get notified via the
 // LexicalOnChangePlugin!
@@ -59,7 +60,7 @@ function EditorWrapper() {
         <MyCustomAutoFocusPlugin />
         <OnChangePlugin onChange={onChange} />
         <HistoryPlugin />
-
+        <ImagesPlugin captionsEnabled={false} />
         <ListPlugin />
         <LinkPlugin />
       </Box>

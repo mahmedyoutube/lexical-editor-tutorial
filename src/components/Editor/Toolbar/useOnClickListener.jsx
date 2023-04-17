@@ -172,6 +172,8 @@ const useOnClickListener = () => {
       editor.dispatchCommand(REDO_COMMAND);
     } else if (event === eventTypes.formatUndo) {
       editor.dispatchCommand(UNDO_COMMAND);
+    } else if (event === eventTypes.formatInsertLink) {
+      insertLink();
     }
   };
 
@@ -185,6 +187,14 @@ const useOnClickListener = () => {
       });
     }
   };
+
+  const insertLink = useCallback(() => {
+    if (!isLink) {
+      editor.dispatchCommand(TOGGLE_LINK_COMMAND, "https://");
+    } else {
+      editor.dispatchCommand(TOGGLE_LINK_COMMAND, null);
+    }
+  }, [editor, isLink]);
 
   const formatHeading = (val) => {
     if (blockType !== val) {
@@ -239,7 +249,7 @@ const useOnClickListener = () => {
     }
   };
 
-  return { onClick };
+  return { onClick, isLink, editor };
 };
 
 function getSelectedNode(selection) {
