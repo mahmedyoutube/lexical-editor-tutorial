@@ -3,6 +3,7 @@ import { useEffect } from "react";
 
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
 import { PlainTextPlugin } from "@lexical/react/LexicalPlainTextPlugin";
+import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
@@ -10,9 +11,11 @@ import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
 import { MuiContentEditable, placeHolderSx } from "./styles";
 import { Box } from "@mui/material";
+import { ListPlugin } from "@lexical/react/LexicalListPlugin";
+import { LinkPlugin } from "@lexical/react/LexicalLinkPlugin";
 import Toolbar from "../Toolbar";
-
-const theme = {};
+import lexicalEditorTheme from "../../../theme/lexicalEditorTheme";
+import lexicalEditorConfig from "../config";
 
 // When the editor changes, you can get notified via the
 // LexicalOnChangePlugin!
@@ -41,25 +44,12 @@ function MyCustomAutoFocusPlugin() {
   return null;
 }
 
-// Catch any errors that occur during Lexical updates and log them
-// or throw them as needed. If you don't throw them, Lexical will
-// try to recover gracefully without losing user data.
-function onError(error) {
-  console.error(error);
-}
-
 function EditorWrapper() {
-  const initialConfig = {
-    namespace: "MyEditor",
-    theme,
-    onError,
-  };
-
   return (
-    <LexicalComposer initialConfig={initialConfig}>
+    <LexicalComposer initialConfig={lexicalEditorConfig}>
       <Toolbar />
       <Box sx={{ position: "relative", background: "white", mt: 1 }}>
-        <PlainTextPlugin
+        <RichTextPlugin
           contentEditable={<MuiContentEditable />}
           placeholder={<Box sx={placeHolderSx}>Enter your text here</Box>}
           ErrorBoundary={LexicalErrorBoundary}
@@ -67,6 +57,11 @@ function EditorWrapper() {
         <OnChangePlugin onChange={onChange} />
         <HistoryPlugin />
         <MyCustomAutoFocusPlugin />
+        <OnChangePlugin onChange={onChange} />
+        <HistoryPlugin />
+
+        <ListPlugin />
+        <LinkPlugin />
       </Box>
     </LexicalComposer>
   );
