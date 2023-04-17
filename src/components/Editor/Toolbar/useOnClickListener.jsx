@@ -40,6 +40,8 @@ import {
   $wrapNodes,
   $isAtNodeEnd,
 } from "@lexical/selection";
+import useModal from "../../../hooks/useModal";
+import { InsertImageDialog } from "../plugin/ImagePlugin";
 
 const LowPriority = 1;
 
@@ -48,6 +50,7 @@ const useOnClickListener = () => {
   const [blockType, setBlockType] = useState("paragraph");
   const [selectedEventTypes, setSelectedEventTypes] = useState([]);
   const [isLink, setIsLink] = useState(false);
+  const [modal, showModal] = useModal();
 
   const updateToolbar = useCallback(() => {
     const selection = $getSelection();
@@ -174,6 +177,10 @@ const useOnClickListener = () => {
       editor.dispatchCommand(UNDO_COMMAND);
     } else if (event === eventTypes.formatInsertLink) {
       insertLink();
+    } else if (event === eventTypes.insertImage) {
+      showModal("Insert Image", (onClose) => (
+        <InsertImageDialog activeEditor={editor} onClose={onClose} />
+      ));
     }
   };
 
@@ -249,7 +256,7 @@ const useOnClickListener = () => {
     }
   };
 
-  return { onClick, isLink, editor };
+  return { onClick, isLink, editor, modal, showModal };
 };
 
 function getSelectedNode(selection) {

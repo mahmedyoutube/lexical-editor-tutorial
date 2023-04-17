@@ -5,7 +5,7 @@ import { createPortal } from "react-dom";
 import FloatingLinkEditor from "./FloatingLinkEditor";
 
 const Toolbar = () => {
-  const { onClick, isLink, editor } = useOnClickListener();
+  const { onClick, isLink, editor, modal } = useOnClickListener();
   return (
     <Grid
       container
@@ -20,6 +20,8 @@ const Toolbar = () => {
 
       {isLink &&
         createPortal(<FloatingLinkEditor editor={editor} />, document.body)}
+
+      {modal}
     </Grid>
   );
 };
